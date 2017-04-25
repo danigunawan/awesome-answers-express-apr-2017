@@ -7,9 +7,14 @@ const Question = require('../models/index').Question;
 
 router.get('/', function (request, response, next) {
   Question
-    .findAll()
+    .findAll() // this returns a promise..
     .then(function (questions) { // allowing us to use .then
-      response.send(questions);
+      // the pathof the template that response.render takes
+      // is relative to the view/ folder by default
+      response.render('questions/index', {questions: questions});
+      // the second argument passed to response.render is an
+      // object where all its properties will be available to
+      // the rendered template as variables
     });
     // All sequelize query methods return a promise
 })
